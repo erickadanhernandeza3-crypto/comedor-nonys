@@ -13,6 +13,7 @@ require_once RUTA_APP . '/modelos/categorias.php';
 require_once RUTA_APP . '/modelos/platillos.php';
 require_once RUTA_APP . '/modelos/menu_dia.php';
 require_once RUTA_APP . '/modelos/usuarios.php';
+require_once RUTA_APP . '/modelos/pedido.php';
 require_once RUTA_APP . '/includes/peticion.php';
 require_once RUTA_APP . '/includes/respuesta.php';
 require_once RUTA_APP . '/includes/imagenes.php';
@@ -50,6 +51,14 @@ function peticion_de_datos(): bool
     $script = (string) ($_SERVER['SCRIPT_NAME'] ?? '');
 
     return substr($script, -7) === 'api.php' || strpos($script, '/api/') !== false;
+}
+
+/** Abre la sesión del navegador si todavía no está abierta. */
+function abrir_sesion(): void
+{
+    if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+    }
 }
 
 /** Imprime una vista de la carpeta vistas/ con los datos que reciba. */

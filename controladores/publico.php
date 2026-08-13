@@ -7,13 +7,16 @@ require_once __DIR__ . '/../includes/funciones.php';
 
 function pagina_inicio(): array
 {
-    $hoy = date('Y-m-d');
+    $hoy    = date('Y-m-d');
+    $pedido = pedido_actual();
 
     return [
-        'titulo'     => config('nombre_negocio') . ' — Menú y comida del día',
-        'hoy'        => $hoy,
-        'items'      => menu_del_dia($hoy),
-        'categorias' => categorias_con_platillos(),
+        'titulo'      => config('nombre_negocio') . ' — Menú y comida del día',
+        'hoy'         => $hoy,
+        'items'       => menu_del_dia($hoy),
+        'categorias'  => categorias_con_platillos(),
+        'pedido'      => $pedido,
+        'totalPedido' => total_pedido($pedido),
     ];
 }
 

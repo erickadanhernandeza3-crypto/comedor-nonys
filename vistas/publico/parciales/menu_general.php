@@ -36,12 +36,6 @@
         <?php foreach ($categoria['platillos'] as $platillo):
           $agotado = !$platillo['disponible'];
           $foto    = url_foto($platillo);
-          $mensaje = sprintf(
-              '¡Hola %s! Quiero pedir: %s (%s).',
-              config('nombre_negocio'),
-              $platillo['nombre'],
-              precio((float) $platillo['precio'])
-          );
         ?>
           <div class="col-12 col-sm-6 col-lg-4">
             <article class="tarjeta-platillo <?= $agotado ? 'tarjeta-platillo--agotado' : '' ?>">
@@ -72,8 +66,10 @@
                   <?php if ($agotado): ?>
                     <span class="small text-muted">No disponible hoy</span>
                   <?php else: ?>
-                    <a class="btn btn-wa btn-sm px-3" target="_blank" rel="noopener"
-                       href="<?= e(enlace_whatsapp($mensaje)) ?>">Pedir</a>
+                    <button type="button" class="btn btn-terracota btn-sm px-3"
+                            data-agregar-pedido data-tipo="platillo" data-id="<?= (int) $platillo['id'] ?>">
+                      + Agregar
+                    </button>
                   <?php endif; ?>
                 </div>
               </div>

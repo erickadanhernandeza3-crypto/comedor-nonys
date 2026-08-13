@@ -4,9 +4,7 @@
  */
 require_once __DIR__ . '/funciones.php';
 
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
+abrir_sesion();
 
 function usuario_actual(): ?array
 {

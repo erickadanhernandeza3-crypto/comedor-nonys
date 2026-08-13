@@ -1,7 +1,8 @@
 <?php
 /**
  * Portada del menú público.
- * Espera: $titulo, $hoy, $items (comida del día), $categorias (con platillos)
+ * Espera: $titulo, $hoy, $items (comida del día), $categorias (con platillos),
+ *         $pedido (renglones del pedido), $totalPedido
  */
 vista('publico/encabezado', ['titulo' => $titulo]);
 ?>
@@ -82,5 +83,26 @@ vista('publico/encabezado', ['titulo' => $titulo]);
   </section>
 
 </main>
+
+<!-- ================= Mi pedido ================= -->
+<aside class="offcanvas offcanvas-end panel-pedido" tabindex="-1" id="miPedido"
+       aria-labelledby="tituloPedido">
+  <div class="offcanvas-header">
+    <h2 class="offcanvas-title h5 mb-0" id="tituloPedido">🧺 Mi pedido</h2>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Cerrar"></button>
+  </div>
+  <div class="offcanvas-body" id="panel-pedido">
+    <?php vista('publico/parciales/pedido', ['items' => $pedido, 'total' => $totalPedido]); ?>
+  </div>
+</aside>
+
+<!-- Barra que aparece abajo en cuanto hay algo pedido -->
+<div class="barra-pedido <?= $pedido ? '' : 'd-none' ?>" data-barra-pedido>
+  <button type="button" class="barra-pedido__boton" data-bs-toggle="offcanvas" data-bs-target="#miPedido">
+    <span class="barra-pedido__cuenta" data-pedido-piezas><?= piezas_pedido($pedido) ?></span>
+    <span>Ver mi pedido</span>
+    <span class="barra-pedido__total" data-pedido-total><?= precio($totalPedido) ?></span>
+  </button>
+</div>
 
 <?php vista('publico/pie'); ?>

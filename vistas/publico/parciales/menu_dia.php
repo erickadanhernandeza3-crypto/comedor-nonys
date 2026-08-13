@@ -16,11 +16,6 @@ $numero = 0;
 foreach ($items as $item):
     $numero++;
     $agotado = !$item['disponible'];
-    $mensaje = sprintf(
-        '¡Hola %s! Quiero pedir de la comida del día: %s.',
-        config('nombre_negocio'),
-        $item['nombre']
-    );
 ?>
   <div class="platillo-dia <?= $agotado ? 'platillo-dia--agotado' : '' ?>">
     <span class="platillo-dia__num"><?= $numero ?></span>
@@ -44,8 +39,10 @@ foreach ($items as $item):
         <div class="small text-muted">Incluido</div>
       <?php endif; ?>
       <?php if (!$agotado): ?>
-        <a class="btn btn-wa btn-sm mt-1 px-3" target="_blank" rel="noopener"
-           href="<?= e(enlace_whatsapp($mensaje)) ?>">Pedir</a>
+        <button type="button" class="btn btn-terracota btn-sm mt-1 px-3"
+                data-agregar-pedido data-tipo="dia" data-id="<?= (int) $item['id'] ?>">
+          + Agregar
+        </button>
       <?php endif; ?>
     </div>
   </div>

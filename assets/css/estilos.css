@@ -397,6 +397,115 @@ a:hover { color: var(--terracota-osc); }
 }
 .admin-avisos .alert { margin-bottom: 0; }
 
+/* ---------- Mi pedido ---------- */
+.panel-pedido { width: min(26rem, 100vw); background: var(--hueso); }
+.panel-pedido .offcanvas-header { border-bottom: 1px solid var(--borde); }
+
+.pedido-vacio { text-align: center; padding: 2.5rem 1rem; }
+.pedido-vacio__icono { font-size: 2.75rem; margin-bottom: .5rem; }
+
+.pedido-lista { margin-bottom: 1rem; }
+.pedido-renglon {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  padding: .75rem 0;
+  border-bottom: 1px dashed var(--borde);
+}
+.pedido-renglon--agotado { opacity: .75; }
+.pedido-renglon__datos { flex: 1 1 auto; min-width: 0; }
+.pedido-renglon__nombre { font-weight: 600; line-height: 1.25; }
+.pedido-renglon__cantidad { display: flex; align-items: center; gap: .35rem; flex: 0 0 auto; }
+.pedido-renglon__numero { min-width: 1.4rem; text-align: center; font-weight: 700; }
+.pedido-renglon__importe { flex: 0 0 auto; text-align: right; }
+
+.boton-redondo {
+  width: 1.9rem;
+  height: 1.9rem;
+  border-radius: 50%;
+  border: 1px solid var(--borde);
+  background: #fff;
+  color: var(--tinta);
+  font-size: 1.1rem;
+  line-height: 1;
+  font-weight: 700;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+}
+.boton-redondo:hover { background: var(--maiz); border-color: var(--maiz); }
+
+.pedido-total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 2px solid var(--tinta);
+  padding-top: .75rem;
+  margin-bottom: 1rem;
+  font-weight: 700;
+}
+.precio--grande { font-size: 1.35rem; }
+.etiqueta--dia { background: var(--hueso-osc); color: var(--terracota-osc); }
+
+/* Barra fija con el resumen, aparece al agregar el primer platillo */
+.barra-pedido {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1035;
+  padding: .6rem .9rem calc(.6rem + env(safe-area-inset-bottom));
+  background: linear-gradient(to top, rgba(58, 42, 32, .18), transparent);
+  pointer-events: none;
+}
+.barra-pedido__boton {
+  pointer-events: auto;
+  width: min(34rem, 100%);
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  background: var(--terracota);
+  color: #fff;
+  border: none;
+  border-radius: 999px;
+  padding: .8rem 1.1rem;
+  font-weight: 700;
+  box-shadow: var(--sombra-alta);
+  cursor: pointer;
+}
+.barra-pedido__boton:hover { background: var(--terracota-osc); }
+.barra-pedido__cuenta {
+  background: rgba(255, 255, 255, .25);
+  border-radius: 999px;
+  min-width: 1.8rem;
+  padding: .1rem .5rem;
+  text-align: center;
+}
+.barra-pedido__total { margin-left: auto; }
+
+/* Cuando hay pedido, la barra ocupa el lugar del botón flotante de WhatsApp */
+body.con-pedido .wa-flotante { display: none; }
+
+/* Globito de aviso del pedido */
+.aviso-flotante {
+  position: fixed;
+  top: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1090;
+  max-width: min(24rem, calc(100vw - 2rem));
+  background: var(--olivo);
+  color: #fff;
+  font-weight: 600;
+  font-size: .92rem;
+  padding: .7rem 1.1rem;
+  border-radius: 999px;
+  box-shadow: var(--sombra-alta);
+}
+.aviso-flotante--warning { background: var(--maiz); color: var(--tinta); }
+.aviso-flotante--danger  { background: var(--chile); }
+
 /* ---------- Utilidades ---------- */
 .cargando { opacity: .5; pointer-events: none; transition: opacity .15s; }
 
