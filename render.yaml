@@ -1,0 +1,27 @@
+# Configuración del servicio en Render.
+# Los valores de la base se cargan a mano en el panel de Render (sync: false),
+# para que las contraseñas no queden guardadas en el repositorio.
+services:
+  - type: web
+    name: comedor-nonys
+    runtime: docker
+    plan: free
+    region: oregon
+    healthCheckPath: /index.php
+    envVars:
+      - key: DB_HOST
+        sync: false
+      - key: DB_USUARIO
+        sync: false
+      - key: DB_CLAVE
+        sync: false
+      - key: DB_NOMBRE
+        sync: false
+      - key: DB_PUERTO
+        sync: false
+      - key: DB_SSL
+        value: "1"
+      - key: TZ_PHP
+        value: America/Mexico_City
+      - key: TZ_MYSQL
+        value: "-06:00"

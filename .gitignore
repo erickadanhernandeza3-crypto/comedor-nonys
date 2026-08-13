@@ -1,0 +1,5 @@
+_viejo/
+assets/img/*
+!assets/img/.gitkeep
+*.log
+datos_para_subir.sql

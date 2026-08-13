@@ -1,0 +1,402 @@
+/* Comedor Nony's — paleta y componentes */
+
+:root {
+  --terracota:   #b8532c;
+  --terracota-osc:#8f3d1f;
+  --olivo:       #6e7f3c;
+  --olivo-osc:   #55622d;
+  --maiz:        #e8b33c;
+  --chile:       #9e2b25;
+  --hueso:       #fbf5e9;
+  --hueso-osc:   #f2e8d5;
+  --tinta:       #3a2a20;
+  --tinta-suave: #6b5646;
+  --borde:       #e3d5bd;
+  --sombra:      0 2px 10px rgba(58, 42, 32, .08);
+  --sombra-alta: 0 8px 24px rgba(58, 42, 32, .14);
+  --radio:       14px;
+}
+
+body {
+  background-color: var(--hueso);
+  color: var(--tinta);
+  font-family: 'Karla', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  font-size: 1rem;
+  line-height: 1.6;
+  /* Textura sutil de barro, no una imagen externa */
+  background-image:
+    radial-gradient(circle at 1px 1px, rgba(184, 83, 44, .06) 1px, transparent 0);
+  background-size: 22px 22px;
+}
+
+h1, h2, h3, h4, .fuente-titulo {
+  font-family: 'Bitter', Georgia, 'Times New Roman', serif;
+  font-weight: 700;
+  color: var(--tinta);
+  letter-spacing: -.01em;
+}
+
+a { color: var(--terracota); }
+a:hover { color: var(--terracota-osc); }
+
+/* ---------- Franja de papel picado ---------- */
+.papel-picado {
+  height: 26px;
+  background-repeat: repeat-x;
+  background-size: 60px 26px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='26'%3E%3Cg%3E%3Cpath d='M0 0h20v14a10 10 0 0 1-20 0z' fill='%23b8532c'/%3E%3Cpath d='M20 0h20v14a10 10 0 0 1-20 0z' fill='%236e7f3c'/%3E%3Cpath d='M40 0h20v14a10 10 0 0 1-20 0z' fill='%23e8b33c'/%3E%3Ccircle cx='10' cy='7' r='2.5' fill='%23fbf5e9'/%3E%3Ccircle cx='30' cy='7' r='2.5' fill='%23fbf5e9'/%3E%3Ccircle cx='50' cy='7' r='2.5' fill='%23fbf5e9'/%3E%3C/g%3E%3C/svg%3E");
+}
+
+/* ---------- Encabezado ---------- */
+.barra-superior {
+  background: var(--tinta);
+  color: var(--hueso-osc);
+  font-size: .82rem;
+  padding: .4rem 0;
+}
+.barra-superior a { color: var(--maiz); text-decoration: none; }
+.barra-superior a:hover { text-decoration: underline; }
+
+.navbar-nonys {
+  background: var(--hueso);
+  border-bottom: 1px solid var(--borde);
+  box-shadow: var(--sombra);
+}
+.navbar-nonys .navbar-brand {
+  font-family: 'Bitter', Georgia, serif;
+  font-weight: 700;
+  font-size: 1.35rem;
+  color: var(--terracota);
+  line-height: 1.1;
+}
+.navbar-nonys .navbar-brand small {
+  display: block;
+  font-family: 'Karla', sans-serif;
+  font-size: .68rem;
+  font-weight: 400;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--tinta-suave);
+}
+.navbar-nonys .nav-link {
+  color: var(--tinta);
+  font-weight: 600;
+  border-radius: 999px;
+  padding: .35rem .85rem;
+}
+.navbar-nonys .nav-link:hover,
+.navbar-nonys .nav-link.activo {
+  background: var(--hueso-osc);
+  color: var(--terracota-osc);
+}
+
+/* ---------- Portada ---------- */
+.portada {
+  background:
+    linear-gradient(135deg, rgba(184, 83, 44, .95), rgba(158, 43, 37, .92)),
+    radial-gradient(circle at 80% 20%, rgba(232, 179, 60, .5), transparent 55%);
+  color: #fff;
+  padding: 3rem 0 2.5rem;
+  text-align: center;
+}
+.portada h1 {
+  color: #fff;
+  font-size: clamp(2rem, 7vw, 3.25rem);
+  margin-bottom: .5rem;
+}
+.portada p { color: rgba(255, 255, 255, .92); max-width: 34rem; margin: 0 auto; }
+
+.pastilla-info {
+  display: inline-flex;
+  align-items: center;
+  gap: .4rem;
+  background: rgba(255, 255, 255, .16);
+  border: 1px solid rgba(255, 255, 255, .3);
+  border-radius: 999px;
+  padding: .35rem .9rem;
+  font-size: .85rem;
+  color: #fff;
+  text-decoration: none;
+}
+.pastilla-info:hover { background: rgba(255, 255, 255, .28); color: #fff; }
+
+/* ---------- Títulos de sección ---------- */
+.titulo-seccion {
+  display: flex;
+  align-items: center;
+  gap: .9rem;
+  margin-bottom: 1.25rem;
+}
+.titulo-seccion::after {
+  content: '';
+  flex: 1;
+  height: 3px;
+  border-radius: 3px;
+  background: linear-gradient(90deg, var(--maiz), transparent);
+}
+.titulo-seccion h2 { margin: 0; font-size: clamp(1.4rem, 4vw, 1.9rem); }
+.titulo-seccion .icono { font-size: 1.6rem; line-height: 1; }
+
+/* ---------- Comida del día ---------- */
+.bloque-dia {
+  background: #fff;
+  border: 2px solid var(--maiz);
+  border-radius: var(--radio);
+  box-shadow: var(--sombra-alta);
+  overflow: hidden;
+}
+.bloque-dia__cabecera {
+  background: linear-gradient(135deg, var(--olivo), var(--olivo-osc));
+  color: #fff;
+  padding: 1.1rem 1.25rem;
+}
+.bloque-dia__cabecera h2 { color: #fff; margin: 0; font-size: 1.5rem; }
+.bloque-dia__fecha {
+  font-size: .9rem;
+  color: rgba(255, 255, 255, .9);
+}
+.bloque-dia__cuerpo { padding: 1.1rem 1.25rem 1.35rem; }
+
+.platillo-dia {
+  display: flex;
+  align-items: flex-start;
+  gap: .85rem;
+  padding: .85rem 0;
+  border-bottom: 1px dashed var(--borde);
+}
+.platillo-dia:last-child { border-bottom: 0; padding-bottom: 0; }
+.platillo-dia__num {
+  flex: 0 0 auto;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: var(--hueso-osc);
+  color: var(--terracota);
+  font-weight: 700;
+  font-size: .9rem;
+  display: grid;
+  place-items: center;
+}
+.platillo-dia__cuerpo { flex: 1 1 auto; min-width: 0; }
+.platillo-dia__nombre { font-weight: 700; font-size: 1.05rem; }
+.platillo-dia__desc { font-size: .9rem; color: var(--tinta-suave); margin: 0; }
+.platillo-dia--agotado { opacity: .55; }
+.platillo-dia--agotado .platillo-dia__nombre { text-decoration: line-through; }
+
+/* ---------- Etiquetas de disponibilidad ---------- */
+.etiqueta {
+  display: inline-block;
+  font-size: .72rem;
+  font-weight: 700;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  padding: .18rem .6rem;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+.etiqueta--disponible { background: #e6f0d8; color: var(--olivo-osc); border: 1px solid #c8dba6; }
+.etiqueta--agotado    { background: #f7dedd; color: var(--chile);     border: 1px solid #eebdbb; }
+.etiqueta--destacado  { background: #fdf0d2; color: #8a6412;          border: 1px solid #f0d38f; }
+
+/* ---------- Tarjetas del menú general ---------- */
+.tarjeta-platillo {
+  height: 100%;
+  background: #fff;
+  border: 1px solid var(--borde);
+  border-radius: var(--radio);
+  box-shadow: var(--sombra);
+  overflow: hidden;
+  transition: transform .18s ease, box-shadow .18s ease;
+  display: flex;
+  flex-direction: column;
+}
+.tarjeta-platillo:hover { transform: translateY(-3px); box-shadow: var(--sombra-alta); }
+
+.tarjeta-platillo__foto {
+  aspect-ratio: 16 / 10;
+  background: var(--hueso-osc);
+  object-fit: cover;
+  width: 100%;
+  display: block;
+}
+.tarjeta-platillo__marco {
+  position: relative;
+  background: repeating-linear-gradient(
+    45deg, var(--hueso-osc), var(--hueso-osc) 12px, #ece0c9 12px, #ece0c9 24px);
+  aspect-ratio: 16 / 10;
+  display: grid;
+  place-items: center;
+  color: var(--terracota);
+  font-size: 2.4rem;
+}
+.tarjeta-platillo__cuerpo { padding: .9rem 1rem 1rem; flex: 1 1 auto; display: flex; flex-direction: column; }
+.tarjeta-platillo__nombre { font-size: 1.05rem; margin: 0 0 .2rem; }
+.tarjeta-platillo__desc {
+  font-size: .88rem;
+  color: var(--tinta-suave);
+  margin-bottom: .75rem;
+  flex: 1 1 auto;
+}
+.tarjeta-platillo__pie {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: .6rem;
+}
+.precio {
+  font-family: 'Bitter', Georgia, serif;
+  font-weight: 700;
+  font-size: 1.2rem;
+  color: var(--terracota);
+  white-space: nowrap;
+}
+.tarjeta-platillo--agotado { opacity: .62; }
+
+/* ---------- Botones ---------- */
+.btn-wa {
+  background: #25d366;
+  border-color: #25d366;
+  color: #fff;
+  font-weight: 600;
+  border-radius: 999px;
+}
+.btn-wa:hover, .btn-wa:focus { background: #1da851; border-color: #1da851; color: #fff; }
+
+.btn-terracota {
+  background: var(--terracota);
+  border-color: var(--terracota);
+  color: #fff;
+  font-weight: 600;
+  border-radius: 999px;
+}
+.btn-terracota:hover, .btn-terracota:focus {
+  background: var(--terracota-osc); border-color: var(--terracota-osc); color: #fff;
+}
+.btn-olivo {
+  background: var(--olivo); border-color: var(--olivo); color: #fff; font-weight: 600;
+}
+.btn-olivo:hover, .btn-olivo:focus { background: var(--olivo-osc); border-color: var(--olivo-osc); color: #fff; }
+
+/* Botón flotante de WhatsApp en móvil */
+.wa-flotante {
+  position: fixed;
+  right: 1rem;
+  bottom: 1rem;
+  z-index: 1030;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: #25d366;
+  color: #fff;
+  display: grid;
+  place-items: center;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, .25);
+  font-size: 1.6rem;
+  text-decoration: none;
+}
+.wa-flotante:hover { background: #1da851; color: #fff; }
+
+/* ---------- Navegación por categorías ---------- */
+.chips-categorias {
+  display: flex;
+  gap: .5rem;
+  overflow-x: auto;
+  padding: .25rem .1rem .6rem;
+  scrollbar-width: thin;
+}
+.chips-categorias::-webkit-scrollbar { height: 5px; }
+.chips-categorias::-webkit-scrollbar-thumb { background: var(--borde); border-radius: 999px; }
+.chip {
+  flex: 0 0 auto;
+  background: #fff;
+  border: 1px solid var(--borde);
+  border-radius: 999px;
+  padding: .4rem .95rem;
+  font-size: .9rem;
+  font-weight: 600;
+  color: var(--tinta);
+  text-decoration: none;
+  white-space: nowrap;
+}
+.chip:hover { background: var(--maiz); border-color: var(--maiz); color: var(--tinta); }
+
+/* ---------- Pie de página ---------- */
+.pie {
+  background: var(--tinta);
+  color: var(--hueso-osc);
+  padding: 2.25rem 0 1.5rem;
+  margin-top: 3rem;
+}
+.pie h5 { color: var(--maiz); font-family: 'Bitter', Georgia, serif; font-size: 1rem; }
+.pie a { color: var(--hueso-osc); text-decoration: none; }
+.pie a:hover { color: var(--maiz); text-decoration: underline; }
+.pie hr { border-color: rgba(255, 255, 255, .15); }
+
+/* ---------- Panel administrativo ---------- */
+.admin-cuerpo { background: #f6f2ea; }
+.admin-barra {
+  background: var(--tinta);
+  color: #fff;
+  padding: .7rem 0;
+}
+.admin-barra a { color: var(--hueso-osc); text-decoration: none; font-weight: 600; }
+.admin-barra a:hover { color: var(--maiz); }
+.panel {
+  background: #fff;
+  border: 1px solid var(--borde);
+  border-radius: var(--radio);
+  box-shadow: var(--sombra);
+  padding: 1.25rem;
+}
+.form-label { font-weight: 600; font-size: .9rem; }
+.form-control:focus, .form-select:focus {
+  border-color: var(--maiz);
+  box-shadow: 0 0 0 .2rem rgba(232, 179, 60, .25);
+}
+
+.tabla-admin td, .tabla-admin th { vertical-align: middle; }
+
+/* Foto del platillo: miniatura en la tabla y vista previa en el formulario. */
+.miniatura {
+  width: 44px;
+  height: 44px;
+  flex: 0 0 auto;
+  object-fit: cover;
+  border-radius: .5rem;
+  border: 1px solid var(--borde);
+}
+.caja-foto {
+  background: #faf7f1;
+  border: 1px dashed var(--borde);
+  border-radius: var(--radio);
+  padding: .75rem;
+  text-align: center;
+}
+.vista-previa {
+  display: block;
+  width: 100%;
+  max-height: 10rem;
+  object-fit: cover;
+  border-radius: calc(var(--radio) - .25rem);
+}
+
+/* Avisos que devuelve el AJAX del panel: se apilan arriba a la derecha. */
+.admin-avisos {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  z-index: 1080;
+  width: min(24rem, calc(100vw - 2rem));
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+}
+.admin-avisos .alert { margin-bottom: 0; }
+
+/* ---------- Utilidades ---------- */
+.cargando { opacity: .5; pointer-events: none; transition: opacity .15s; }
+
+@media (max-width: 575.98px) {
+  .portada { padding: 2.25rem 0 2rem; }
+  .bloque-dia__cuerpo { padding: .9rem 1rem 1.1rem; }
+}

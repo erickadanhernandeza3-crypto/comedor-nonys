@@ -1,0 +1,6 @@
+# Los archivos que corren dentro del contenedor deben quedar con saltos de línea
+# de Linux, aunque se editen en Windows. Si les entra CRLF, el build de Render
+# falla con errores raros.
+Dockerfile   text eol=lf
+docker/*.ini text eol=lf
+*.sh         text eol=lf
