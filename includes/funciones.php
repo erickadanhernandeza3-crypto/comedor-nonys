@@ -17,6 +17,41 @@ require_once RUTA_APP . '/includes/peticion.php';
 require_once RUTA_APP . '/includes/respuesta.php';
 require_once RUTA_APP . '/includes/imagenes.php';
 
+/**
+ * Última red de seguridad: si algo truena (casi siempre la base de datos), el
+ * cliente ve un aviso decente en vez de una página en blanco, y el detalle
+ * queda en el registro del servidor para que lo veamos nosotros.
+ */
+set_exception_handler(static function (Throwable $problema): void {
+    error_log("Comedor Nony's: " . $problema->getMessage()
+        . ' en ' . $problema->getFile() . ':' . $problema->getLine());
+
+    http_response_code(503);
+
+    if (peticion_de_datos()) {
+        header('Content-Type: application/json; charset=utf-8');
+        echo json_encode([
+            'ok'         => false,
+            'tipo'       => 'danger',
+            'mensaje'    => 'El servidor no está respondiendo. Inténtalo en un momento.',
+            'fragmentos' => [],
+            'datos'      => [],
+        ], JSON_UNESCAPED_UNICODE);
+
+        return;
+    }
+
+    vista('publico/aviso_error');
+});
+
+/** ¿La petición esperaba datos (AJAX) en lugar de una página? */
+function peticion_de_datos(): bool
+{
+    $script = (string) ($_SERVER['SCRIPT_NAME'] ?? '');
+
+    return substr($script, -7) === 'api.php' || strpos($script, '/api/') !== false;
+}
+
 /** Imprime una vista de la carpeta vistas/ con los datos que reciba. */
 function vista(string $_ruta, array $_datos = []): void
 {
