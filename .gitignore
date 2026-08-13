@@ -3,3 +3,4 @@ assets/img/*
 !assets/img/.gitkeep
 *.log
 datos_para_subir.sql
+tidb.cnf
