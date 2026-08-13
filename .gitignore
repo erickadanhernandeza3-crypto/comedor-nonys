@@ -4,3 +4,4 @@ assets/img/*
 *.log
 datos_para_subir.sql
 tidb.cnf
+render.key
