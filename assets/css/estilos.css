@@ -92,33 +92,37 @@ a:hover { color: var(--terracota-osc); }
 
 /* ---------- Portada ---------- */
 .portada {
+  /* Mismo fondo claro del resto de la página, con un resplandor de maíz
+     apenas perceptible para que el encabezado no se vea plano. */
   background:
-    linear-gradient(135deg, rgba(184, 83, 44, .95), rgba(158, 43, 37, .92)),
-    radial-gradient(circle at 80% 20%, rgba(232, 179, 60, .5), transparent 55%);
-  color: #fff;
+    radial-gradient(circle at 80% 15%, rgba(232, 179, 60, .22), transparent 60%),
+    var(--hueso);
+  color: var(--tinta);
   padding: 3rem 0 2.5rem;
   text-align: center;
 }
 .portada h1 {
-  color: #fff;
+  color: var(--terracota);
   font-size: clamp(2rem, 7vw, 3.25rem);
   margin-bottom: .5rem;
 }
-.portada p { color: rgba(255, 255, 255, .92); max-width: 34rem; margin: 0 auto; }
+.portada p { color: var(--tinta-suave); max-width: 34rem; margin: 0 auto; }
 
 .pastilla-info {
   display: inline-flex;
   align-items: center;
   gap: .4rem;
-  background: rgba(255, 255, 255, .16);
-  border: 1px solid rgba(255, 255, 255, .3);
+  background: #fff;
+  border: 1px solid var(--borde);
   border-radius: 999px;
   padding: .35rem .9rem;
   font-size: .85rem;
-  color: #fff;
+  font-weight: 600;
+  color: var(--tinta);
   text-decoration: none;
+  box-shadow: var(--sombra);
 }
-.pastilla-info:hover { background: rgba(255, 255, 255, .28); color: #fff; }
+.pastilla-info:hover { background: var(--maiz); border-color: var(--maiz); color: var(--tinta); }
 
 /* ---------- Títulos de sección ---------- */
 .titulo-seccion {
