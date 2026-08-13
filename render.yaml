@@ -6,7 +6,9 @@ services:
     name: comedor-nonys
     runtime: docker
     plan: free
-    region: oregon
+    # Virginia queda del mismo lado que el cluster de TiDB (us-east-1):
+    # mientras más cerca esté la base, más rápido carga el menú.
+    region: virginia
     healthCheckPath: /index.php
     envVars:
       - key: DB_HOST
