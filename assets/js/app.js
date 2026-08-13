@@ -154,6 +154,11 @@
 
     const enviar = evento.target.closest('[data-pedido-enviar]');
     if (enviar) {
+      // La pestaña se abre aquí, dentro del clic. Si se abriera después de
+      // esperar al servidor, el navegador la tomaría por emergente y la
+      // bloquearía. Así el menú se queda abierto y WhatsApp va aparte.
+      const ventana = window.open('', '_blank');
+
       enviar.disabled = true;
       const respuesta = aplicar(await pedir({
         accion: 'enviar',
@@ -161,10 +166,26 @@
       }));
       enviar.disabled = false;
 
-      // Mismo tab: así ningún bloqueador de ventanas emergentes lo detiene.
-      if (respuesta.ok && respuesta.datos.whatsapp) {
-        window.location.href = respuesta.datos.whatsapp;
+      if (!respuesta.ok) {
+        if (ventana) ventana.close();
+        return;
       }
+
+      if (ventana) {
+        ventana.location.href = respuesta.datos.whatsapp;
+      } else {
+        window.location.href = respuesta.datos.whatsapp;   // si bloquearon la pestaña
+      }
+
+      if (respuesta.datos.cerrar) cerrarPanel();
     }
   });
+
+  /** Cierra el panel lateral para dejar el menú a la vista. */
+  function cerrarPanel() {
+    const lateral = document.getElementById('miPedido');
+    if (lateral && window.bootstrap) {
+      window.bootstrap.Offcanvas.getInstance(lateral)?.hide();
+    }
+  }
 })();

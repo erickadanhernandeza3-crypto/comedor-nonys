@@ -121,9 +121,16 @@ function pedido_enviar(array $entrada): array
         );
     }
 
-    return respuesta_ok('Te abrimos WhatsApp con tu pedido.', [
-        'datos' => ['whatsapp' => enlace_whatsapp(mensaje_del_pedido($items, texto($entrada, 'nota')))],
-    ]);
+    $enlace = enlace_whatsapp(mensaje_del_pedido($items, texto($entrada, 'nota')));
+
+    // Ya se mandó: el carrito se vacía y la persona queda lista para otro pedido.
+    vaciar_pedido();
+
+    $respuesta = estado_pedido('¡Pedido enviado! Te abrimos WhatsApp para confirmarlo.');
+    $respuesta['datos']['whatsapp'] = $enlace;
+    $respuesta['datos']['cerrar']   = true;
+
+    return $respuesta;
 }
 
 /** El texto que le llega al comedor por WhatsApp. */
